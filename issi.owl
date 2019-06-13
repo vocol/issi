@@ -2,6 +2,7 @@
 <rdf:RDF xmlns="http://www.w3id.org/issi/"
      xml:base="http://www.w3id.org/issi/"
      xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:ns="http://creativecommons.org/ns#"
      xmlns:org="http://www.w3.org/ns/org#"
      xmlns:owl="http://www.w3.org/2002/07/owl#"
      xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -17,7 +18,7 @@
      xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#">
     <owl:Ontology rdf:about="http://www.w3id.org/issi/">
         <owl:versionIRI rdf:resource="http://www.w3id.org/issi/0.0.1"/>
-        <owl:imports rdf:resource="http://example.org/mto/mtconnectmachinedata#"/>
+        <owl:imports rdf:resource="http://purl.oclc.org/NET/ssnx/ssn"/>
         <owl:imports rdf:resource="http://www.w3.org/2006/time#2016"/>
         <owl:imports rdf:resource="http://www.w3.org/2006/vcard/ns"/>
         <owl:imports rdf:resource="http://www.w3.org/ns/org#"/>
@@ -58,6 +59,7 @@
     <owl:AnnotationProperty rdf:about="http://iirds.tekom.de/iirds#description">
         <rdfs:subPropertyOf rdf:resource="http://purl.org/dc/terms/description"/>
         <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
         <rdfs:domain rdf:resource="http://iirds.tekom.de/iirds#iirdsDomainEntity"/>
     </owl:AnnotationProperty>
     
@@ -698,6 +700,120 @@ above the local reference ellipsoid).</rdfs:comment>
     
 
 
+    <!-- http://www.w3id.org/issi/createsWorkOrder -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/createsWorkOrder">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Customer"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+        <rdfs:comment xml:lang="en">A customer who is in need of maintenance sends a request and creates a work order.</rdfs:comment>
+        <rdfs:label xml:lang="en">createsWorkOrder</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/hasProgress -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/hasProgress">
+        <owl:inverseOf rdf:resource="http://www.w3id.org/issi/isProgressOf"/>
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/Progress"/>
+        <rdfs:comment xml:lang="de">Weist einem Auftrag einen Bearbeitungsstatus zu.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/isExecutedBy -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/isExecutedBy">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/Technician"/>
+        <rdfs:comment xml:lang="en">The work order is executed by a technician.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/isLocated -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/isLocated">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/System"/>
+        <rdfs:range rdf:resource="http://www.w3.org/ns/org#Site"/>
+        <rdfs:comment xml:lang="en">A printer can be owned by a customer, but its location could be in one of many sites the customer has.</rdfs:comment>
+        <rdfs:label xml:lang="en">isLocated</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/isProgressOf -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/isProgressOf">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Progress"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/owns -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/owns">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Customer"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/System"/>
+        <rdfs:comment xml:lang="en">Connects a System to a Customer.</rdfs:comment>
+        <rdfs:label xml:lang="en">owns</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/plannedDuration -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/plannedDuration">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Technician"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2006/time#Duration"/>
+        <rdfs:comment xml:lang="en">Is the planned duration a technician is supposed to be with a customer.</rdfs:comment>
+        <rdfs:label xml:lang="en">plannedDuration</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/proccessedByWorkOrder -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/proccessedByWorkOrder">
+        <owl:inverseOf rdf:resource="http://www.w3id.org/issi/processesDevice"/>
+        <rdfs:domain rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Device"/>
+        <rdfs:range rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/processesDevice -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/processesDevice">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+        <rdfs:range rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Device"/>
+        <rdfs:comment xml:lang="en">A work order has a device with a possible problem. The possibly faulty device is subject of the work order.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/scheduledAt -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/scheduledAt">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Technician"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2006/vcard/ns#Address"/>
+        <rdfs:comment xml:lang="en">Planned location for a work order.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/scheduledFor -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3id.org/issi/scheduledFor">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/Technician"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2006/time#Instant"/>
+        <rdfs:comment xml:lang="en">Planned working time for a work order.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -759,6 +875,7 @@ above the local reference ellipsoid).</rdfs:comment>
     <!-- http://iirds.tekom.de/iirds#description -->
 
     <owl:DatatypeProperty rdf:about="http://iirds.tekom.de/iirds#description">
+        <owl:equivalentProperty rdf:resource="http://www.w3id.org/issi/problemDescription"/>
         <rdfs:subPropertyOf rdf:resource="http://iirds.tekom.de/iirds#iirdsAttribute"/>
     </owl:DatatypeProperty>
     
@@ -896,6 +1013,36 @@ above the local reference ellipsoid).</rdfs:comment>
 
     <owl:DatatypeProperty rdf:about="http://iirds.tekom.de/iirds#title">
         <rdfs:subPropertyOf rdf:resource="http://iirds.tekom.de/iirds#iirdsAttribute"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/hasName -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/issi/hasName">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">The name of a device.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/hasSetLanguage -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/issi/hasSetLanguage">
+        <rdfs:domain rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Device"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:comment xml:lang="en">Language in the device settings.</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.w3id.org/issi/problemDescription -->
+
+    <owl:DatatypeProperty rdf:about="http://www.w3id.org/issi/problemDescription">
+        <rdfs:domain rdf:resource="http://www.w3id.org/issi/WorkOrder"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">Problem Description</rdfs:label>
     </owl:DatatypeProperty>
     
 
@@ -1405,6 +1552,14 @@ above the local reference ellipsoid).</rdfs:comment>
     
 
 
+    <!-- http://purl.oclc.org/NET/ssnx/ssn#Device -->
+
+    <rdf:Description rdf:about="http://purl.oclc.org/NET/ssnx/ssn#Device">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/issi/System"/>
+    </rdf:Description>
+    
+
+
     <!-- http://www.w3.org/2003/01/geo/wgs84_pos#Point -->
 
     <owl:Class rdf:about="http://www.w3.org/2003/01/geo/wgs84_pos#Point">
@@ -1457,6 +1612,83 @@ sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P
     
 
 
+    <!-- http://www.w3.org/ns/org#Organization -->
+
+    <rdf:Description rdf:about="http://www.w3.org/ns/org#Organization">
+        <owl:equivalentClass rdf:resource="http://www.w3id.org/issi/Customer"/>
+    </rdf:Description>
+    
+
+
+    <!-- http://www.w3id.org/issi/Customer -->
+
+    <owl:Class rdf:about="http://www.w3id.org/issi/Customer">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/owns"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.w3id.org/issi/System"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment>A customer who is in need of maintenance, is an Organization aka a printing shop in this case.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/issi/Progress -->
+
+    <owl:Class rdf:about="http://www.w3id.org/issi/Progress">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:oneOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.w3id.org/issi/DONE"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/issi/IN_PROGRESS"/>
+                    <rdf:Description rdf:about="http://www.w3id.org/issi/OPEN"/>
+                </owl:oneOf>
+            </owl:Class>
+        </owl:equivalentClass>
+        <rdfs:label xml:lang="en">Progress</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/issi/System -->
+
+    <owl:Class rdf:about="http://www.w3id.org/issi/System">
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/hasName"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/hasSetLanguage"/>
+                <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:comment xml:lang="en">The System which has a problem and belongs to a customer. In this case a printer.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3id.org/issi/Technician -->
+
+    <owl:Class rdf:about="http://www.w3id.org/issi/Technician">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Person"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3.org/2006/vcard/ns#hasName"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.w3.org/2006/vcard/ns#Name"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
     <!-- http://www.w3id.org/issi/WorkOrder -->
 
     <owl:Class rdf:about="http://www.w3id.org/issi/WorkOrder">
@@ -1476,12 +1708,49 @@ sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/isExecutedBy"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.w3id.org/issi/Technician"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/hasProgress"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://www.w3id.org/issi/Progress"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/processesDevice"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://purl.oclc.org/NET/ssnx/ssn#Device"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
                 <owl:onProperty rdf:resource="http://iirds.tekom.de/iirds#identifier"/>
-                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:cardinality>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.w3id.org/issi/problemDescription"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:label xml:lang="en">Work Order</rdfs:label>
     </owl:Class>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <rdf:Description rdf:about="http://xmlns.com/foaf/0.1/Person">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Agent"/>
+    </rdf:Description>
     
 
 
@@ -3527,6 +3796,24 @@ sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P
     
 
 
+    <!-- http://www.w3id.org/issi/DONE -->
+
+    <owl:NamedIndividual rdf:about="http://www.w3id.org/issi/DONE"/>
+    
+
+
+    <!-- http://www.w3id.org/issi/IN_PROGRESS -->
+
+    <owl:NamedIndividual rdf:about="http://www.w3id.org/issi/IN_PROGRESS"/>
+    
+
+
+    <!-- http://www.w3id.org/issi/OPEN -->
+
+    <owl:NamedIndividual rdf:about="http://www.w3id.org/issi/OPEN"/>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -3537,13 +3824,13 @@ sameThing(P1, P2) :- type(P1, Point), type(P2, Point), spaciallyIntersects(P1, P
 
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#AdministrativeMetadata">
         <rdfs:label xml:lang="en">Administrative metadata</rdfs:label>
-        <rdfs:label xml:lang="de">Verwaltungsmetadaten</rdfs:label>
         <iirds:description xml:lang="en">Not intended to be used directly. Use the subclasses instead.</iirds:description>
+        <rdfs:label xml:lang="de">Verwaltungsmetadaten</rdfs:label>
         <rdfs:comment xml:lang="en">Parent class for administrative metadata, such as status and identifier. </rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#AfterUse">
-        <rdfs:label xml:lang="en">After use</rdfs:label>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
+        <rdfs:label xml:lang="en">After use</rdfs:label>
         <rdfs:label xml:lang="de">Nutzungsende</rdfs:label>
         <rdfs:comment xml:lang="en">Parent class for iiRDS standard definitions of product lifecycle phases that occur after the active use of the product. </rdfs:comment>
         <iirds:description xml:lang="en">Not intended to be used directly. Use the subclasses instead. For lifecycle phases not covered by the iiRDS standard subclasses, define custom subclasses.</iirds:description>
@@ -3604,14 +3891,14 @@ The iirds#Component may also be used as a docking point for external component d
         <iirds:description xml:lang="de">Ein Verzeichnis ist eine baumartig organisierte und geordnete Zusammenstellung von Informationseinheiten. Verzeichnisknoten sind die Einträge in dem Baum. Verzeichnisse dienen dem Benutzer als Navigationshilfe über die Informationseinheiten. Ein Inhaltsverzeichnis eines Dokuments ist ein typisches Beispiel eines Verzeichnisses.</iirds:description>
         <rdfs:label xml:lang="de">Verzeichnisknoten</rdfs:label>
         <iirds:description xml:lang="en">A directory is a tree-like, ordered collection of information units. Directory nodes are the entries in the directory. Directories help the user to navigate through the information units. A table of contents is a typical example of a directory. </iirds:description>
-        <rdfs:comment xml:lang="en">A node in a directory</rdfs:comment>
         <rdfs:label xml:lang="en">Directory node</rdfs:label>
+        <rdfs:comment xml:lang="en">A node in a directory</rdfs:comment>
         <rdfs:comment xml:lang="de">Ein Eintrag in einem Verzeichnis</rdfs:comment>
         <iirds:description xml:lang="en">IRI: optional</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#DirectoryNodeType">
-        <rdfs:label xml:lang="de">Verzeichnistyp</rdfs:label>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
+        <rdfs:label xml:lang="de">Verzeichnistyp</rdfs:label>
         <iirds:description xml:lang="de">Ein Verzeichnis, das durch einen Wurzelknoten und seine untergeordneten Knoten aufgespannt wird, hat einen Typ wie &apos;Inhaltsverzeichnis&apos; oder &apos;Abbildungsverzeichnis&apos;.</iirds:description>
         <rdfs:comment xml:lang="de">Verzeichnistyp</rdfs:comment>
         <rdfs:comment xml:lang="en">Directory type</rdfs:comment>
@@ -3619,8 +3906,8 @@ The iirds#Component may also be used as a docking point for external component d
         <rdfs:label xml:lang="en">Directory node type</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Document">
-        <rdfs:label xml:lang="de">Dokument</rdfs:label>
         <rdfs:label xml:lang="en">Document</rdfs:label>
+        <rdfs:label xml:lang="de">Dokument</rdfs:label>
         <iirds:description xml:lang="en">A document consists of one or more files. It can consist of topics. The resource is either a blank node (when there is no file representing the document) or a file in the iiRDS package.</iirds:description>
         <rdfs:comment xml:lang="en">A unit of information in an iiRDS package that represents a complete document.</rdfs:comment>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
@@ -3649,30 +3936,30 @@ The iirds#Component may also be used as a docking point for external component d
         <iirds:description xml:lang="en">Examples are errors, malfunctions, and warnings. 
 Use the relates-to-event property to create a reference from an information unit to an event.</iirds:description>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
-        <rdfs:label xml:lang="en">Event</rdfs:label>
         <rdfs:label xml:lang="de">Ereignis</rdfs:label>
+        <rdfs:label xml:lang="en">Event</rdfs:label>
         <rdfs:comment xml:lang="en">Describes events that happen in the technical system</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Form">
         <iirds:description xml:lang="en">IRI: required</iirds:description>
         <iirds:description xml:lang="en">Examples of forms are service reports, field reports, and user feedback.</iirds:description>
         <rdfs:comment xml:lang="en">Class of topic types that contain information in pre-defined form fields.</rdfs:comment>
-        <rdfs:label xml:lang="en">Form</rdfs:label>
         <rdfs:label xml:lang="de">Formular</rdfs:label>
+        <rdfs:label xml:lang="en">Form</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Formality">
-        <rdfs:comment xml:lang="en">Parent class for information subjects that describe content related to official or legal documents.</rdfs:comment>
         <rdfs:label xml:lang="en">Formality</rdfs:label>
-        <iirds:description xml:lang="en">Examples of formality subjects are license terms and warranty conditions.</iirds:description>
+        <rdfs:comment xml:lang="en">Parent class for information subjects that describe content related to official or legal documents.</rdfs:comment>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
+        <iirds:description xml:lang="en">Examples of formality subjects are license terms and warranty conditions.</iirds:description>
         <rdfs:label xml:lang="de">Formalität</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Fragment">
         <rdfs:label xml:lang="de">Fragment</rdfs:label>
         <iirds:description xml:lang="en">Sections, tables, lists, paragraphs, and hazard statements are examples of fragments. Fragments assign metadata to parts of topic or document files in an iiRDS package. The parts are identified by a fragment selector.</iirds:description>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
-        <rdfs:comment xml:lang="en">A piece of information within a document or topic.</rdfs:comment>
         <rdfs:label xml:lang="en">Fragment</rdfs:label>
+        <rdfs:comment xml:lang="en">A piece of information within a document or topic.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#FragmentSelector">
         <rdfs:comment xml:lang="de">Verweist auf Fragment in einer physikalischen Ressource.</rdfs:comment>
@@ -3704,8 +3991,8 @@ Use the relates-to-event property to create a reference from an information unit
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#IdentityDomain">
         <rdfs:comment xml:lang="en">Domain of an identifier that is assigned to an iiRDS domain entity.</rdfs:comment>
         <rdfs:label xml:lang="en">Identity domain</rdfs:label>
-        <iirds:description xml:lang="en">An identity domain relates to a party, meaning a company or organization. The party is the owner or custodian of the domain.</iirds:description>
         <rdfs:label xml:lang="de">Identitäts-Domäne</rdfs:label>
+        <iirds:description xml:lang="en">An identity domain relates to a party, meaning a company or organization. The party is the owner or custodian of the domain.</iirds:description>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#InformationObject">
@@ -3725,16 +4012,16 @@ Use the relates-to-event property to create a reference from an information unit
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#InformationType">
         <rdfs:label xml:lang="en">Information type</rdfs:label>
         <rdfs:comment xml:lang="en">Type of information. Abstract base class of document and topic type.</rdfs:comment>
-        <iirds:description xml:lang="en">Not intented to be used directly.</iirds:description>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
+        <iirds:description xml:lang="en">Not intented to be used directly.</iirds:description>
         <rdfs:label xml:lang="de">Informationsart</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#InformationUnit">
         <iirds:description xml:lang="en">IRI: required</iirds:description>
         <rdfs:label xml:lang="de">Informationseinheit</rdfs:label>
         <iirds:description xml:lang="en">Not intended to be used directly. Use the subclasses Package, Document, Topic, and Fragment instead.</iirds:description>
-        <rdfs:comment xml:lang="en">A unit of information. Abstract base class for specific information units.</rdfs:comment>
         <rdfs:label xml:lang="en">Information unit</rdfs:label>
+        <rdfs:comment xml:lang="en">A unit of information. Abstract base class for specific information units.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Learning">
         <rdfs:comment xml:lang="en">Class of topic types for learning. Learning content may comprise learning plans, learning objectives, learning content details, summaries, and assessments.</rdfs:comment>
@@ -3780,10 +4067,10 @@ Use the relates-to-event property to create a reference from an information unit
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Process">
         <iirds:description xml:lang="en">IRI: required</iirds:description>
-        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:label xml:lang="de">Prozess</rdfs:label>
-        <rdfs:comment xml:lang="en">Information subject for process-related information</rdfs:comment>
+        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:label xml:lang="en">Process</rdfs:label>
+        <rdfs:comment xml:lang="en">Information subject for process-related information</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#ProductFeature">
         <iirds:description xml:lang="en">Not intended to be used directly. Use the subclasses instead.</iirds:description>
@@ -3835,8 +4122,8 @@ Use the relates-to-event property to create a reference from an information unit
         <rdfs:label xml:lang="en">Putting to use</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Qualification">
-        <rdfs:label xml:lang="en">Qualification</rdfs:label>
         <rdfs:label xml:lang="de">Qualifikation</rdfs:label>
+        <rdfs:label xml:lang="en">Qualification</rdfs:label>
         <iirds:description xml:lang="en">Not intended to be used directly. Use the subclasses instead. </iirds:description>
         <rdfs:comment xml:lang="en">Parent class for different types of skills and roles required for working tasks described in technical documentation. </rdfs:comment>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
@@ -3845,8 +4132,8 @@ Use the relates-to-event property to create a reference from an information unit
         <rdfs:label xml:lang="de">Bereichsselektor</rdfs:label>
         <iirds:description xml:lang="en"></iirds:description>
         <iirds:description xml:lang="en">IRI: optional</iirds:description>
-        <rdfs:comment xml:lang="en">Points to a range in a physical resource. Has a start and end point.</rdfs:comment>
         <rdfs:comment xml:lang="de">Verweist auf einen Bereich in einer physikalischen Ressource. Hat einen Start- und einen Endpunkt.</rdfs:comment>
+        <rdfs:comment xml:lang="en">Points to a range in a physical resource. Has a start and end point.</rdfs:comment>
         <rdfs:label xml:lang="en">Range selector</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Reference">
@@ -3859,8 +4146,8 @@ Use the relates-to-event property to create a reference from an information unit
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Rendition">
         <rdfs:label xml:lang="de">Inhaltsausprägung</rdfs:label>
-        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:comment xml:lang="de">Inhalt einer Informationseinheit in einem bestimmten Format</rdfs:comment>
+        <iirds:description xml:lang="en"></iirds:description>
         <iirds:description xml:lang="en">IRI: optional</iirds:description>
         <rdfs:comment xml:lang="en">Content of an information unit in a specific format</rdfs:comment>
         <rdfs:label xml:lang="en">Rendition</rdfs:label>
@@ -3868,8 +4155,8 @@ Use the relates-to-event property to create a reference from an information unit
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Role">
         <rdfs:comment xml:lang="de">Andockpunkt für unternehmensspezifische Rollen für Anwender des technischen Systems und der dazugehörigen Informationen.</rdfs:comment>
         <rdfs:label xml:lang="en">Role</rdfs:label>
-        <rdfs:label xml:lang="de">Rolle</rdfs:label>
         <iirds:description xml:lang="de">Menge von zusammenhängenden Verhaltensweisen, Berechtigungen und Verpflichtungen, die Nutzern (Menschen, Softwareprozesse oder Geräte) eines Systems zugeordnet sind.</iirds:description>
+        <rdfs:label xml:lang="de">Rolle</rdfs:label>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
         <iirds:description xml:lang="en">Describes a set of connected behaviors, privileges and obligations associated with users (humans, software processes or devices) of a system.</iirds:description>
         <rdfs:comment xml:lang="en">Docking point for custom roles for users of the technical system and the associated technical information.</rdfs:comment>
@@ -3884,17 +4171,17 @@ Use the relates-to-event property to create a reference from an information unit
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Selector">
         <iirds:description xml:lang="en">IRI: optional</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
-        <rdfs:label xml:lang="de">Selektor</rdfs:label>
         <rdfs:label xml:lang="en">Selector</rdfs:label>
         <rdfs:comment xml:lang="de">Verweis auf eine physikalische Ressource.</rdfs:comment>
+        <rdfs:label xml:lang="de">Selektor</rdfs:label>
         <rdfs:comment xml:lang="en">Pointer to a physical resource.</rdfs:comment>
         <iirds:description xml:lang="de"></iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#SkillLevel">
         <rdfs:label xml:lang="de">Kenntnisstufe</rdfs:label>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
-        <iirds:description xml:lang="en">Describe the levels of ability required to carry out a specific task described in the technical documentation.</iirds:description>
         <rdfs:comment xml:lang="en">Docking point for custom skill levels that the users of the technical system and the associated technical information require.</rdfs:comment>
+        <iirds:description xml:lang="en">Describe the levels of ability required to carry out a specific task described in the technical documentation.</iirds:description>
         <rdfs:label xml:lang="en">Skill level</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Supply">
@@ -3923,9 +4210,9 @@ Use the relates-to-event property to create a reference from an information unit
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#TechnicalOverview">
         <iirds:description xml:lang="en">Examples are circuit diagrams, flow diagrams, software interface overviews, and pneumatic diagrams.</iirds:description>
         <iirds:description xml:lang="en">IRI: required</iirds:description>
-        <rdfs:comment xml:lang="en">Parent class for information subjects describing content related to technical plans, diagrams, or the technical architecture of the product.</rdfs:comment>
-        <rdfs:label xml:lang="en">Technical overview</rdfs:label>
         <rdfs:label xml:lang="de">Technische Übersicht</rdfs:label>
+        <rdfs:label xml:lang="en">Technical overview</rdfs:label>
+        <rdfs:comment xml:lang="en">Parent class for information subjects describing content related to technical plans, diagrams, or the technical architecture of the product.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#Topic">
         <rdfs:label xml:lang="de">Topic</rdfs:label>
@@ -3975,8 +4262,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
         <rdfs:comment xml:lang="en">Date of creation of the information unit</rdfs:comment>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <rdfs:label xml:lang="de">Erstellungsdatum</rdfs:label>
         <rdfs:label xml:lang="en">Date of Creation</rdfs:label>
     </rdf:Description>
@@ -3984,8 +4271,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <rdfs:label xml:lang="en">Effective date</rdfs:label>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..1]</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
-        <rdfs:comment xml:lang="en">Date and time on which the given content lifecycle status becomes valid.</rdfs:comment>
         <rdfs:label xml:lang="de">Gültigkeitsbeginn</rdfs:label>
+        <rdfs:comment xml:lang="en">Date and time on which the given content lifecycle status becomes valid.</rdfs:comment>
         <rdfs:comment xml:lang="de">Datum und Uhrzeit, an dem der vergebene Status gültig wird.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
         <iirds:description xml:lang="en"></iirds:description>
@@ -3995,14 +4282,14 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..1]</iirds:description>
         <rdfs:label xml:lang="de">Auslaufdatum</rdfs:label>
         <rdfs:comment xml:lang="en">Date and time on which the given content lifecycle status becomes invalid.</rdfs:comment>
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <iirds:description xml:lang="en"></iirds:description>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <rdfs:comment xml:lang="de">Datum und Uhrzeit, an dem der vergebene Status ungültig wird.</rdfs:comment>
         <rdfs:label xml:lang="en">Expiry date</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#dateOfLastModification">
-        <rdfs:comment xml:lang="en">Specifies the date and time on which the information unit was last changed.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+        <rdfs:comment xml:lang="en">Specifies the date and time on which the information unit was last changed.</rdfs:comment>
         <rdfs:label xml:lang="en">Date of last modification</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <iirds:description xml:lang="en"></iirds:description>
@@ -4024,13 +4311,13 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#iirdsDomainEntity [0..*]</iirds:description>
         <rdfs:label xml:lang="en">Description</rdfs:label>
         <rdfs:comment xml:lang="en">An account of the resource.</rdfs:comment>
-        <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <iirds:description xml:lang="en">Typically a free-text acount of the resource</iirds:description>
+        <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#duration">
         <rdfs:label xml:lang="en">Duration</rdfs:label>
-        <iirds:description xml:lang="en"></iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#PlanningTime [1]</iirds:description>
+        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:label xml:lang="de">Dauer</rdfs:label>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2001/XMLSchema#duration"/>
         <rdfs:comment xml:lang="en">A span of time.</rdfs:comment>
@@ -4059,27 +4346,27 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#frequency">
         <rdfs:comment xml:lang="de">Wartungsfrequenz</rdfs:comment>
         <rdfs:label xml:lang="en">Maintenance frequency</rdfs:label>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#MaintenanceInterval [1]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#MaintenanceInterval [1]</iirds:description>
         <rdfs:comment xml:lang="en">Maintenance frequency</rdfs:comment>
         <rdfs:label xml:lang="de">Wartungsfrequenz</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-abstract">
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:label xml:lang="de">hat Zusammenfassung</rdfs:label>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:label xml:lang="en">has abstract</rdfs:label>
         <iirds:description xml:lang="en"></iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <rdfs:comment xml:lang="en">Relates to a literal or information unit that provides an abstract/summary for the information unit.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-component">
-        <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <rdfs:comment xml:lang="de">Verweist auf eine Kompoente, die Teil einer anderen Komponente ist.</rdfs:comment>
+        <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Component [0..*]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
         <rdfs:label xml:lang="de">hat Komponente</rdfs:label>
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <rdfs:label xml:lang="en">has component</rdfs:label>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <rdfs:comment xml:lang="en">Relates to a component that is part of another component.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-content-lifecycle-status">
@@ -4092,11 +4379,11 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <rdfs:comment xml:lang="en">References the content lifecycle status of the information unit.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-content-lifecycle-status-value">
-        <rdfs:label xml:lang="en">has status value</rdfs:label>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [1]</iirds:description>
+        <rdfs:label xml:lang="en">has status value</rdfs:label>
         <rdfs:label xml:lang="de">hat Statuswert</rdfs:label>
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <iirds:description xml:lang="en"></iirds:description>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <rdfs:comment xml:lang="en">References the content lifecycle status value.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatusValue"/>
     </rdf:Description>
@@ -4150,8 +4437,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <rdfs:comment xml:lang="de">Verweist auf den ersten Verzeichniseintrag in der nächsten Unterebene.</rdfs:comment>
         <rdfs:comment xml:lang="en">References the first directory node on the next sub level.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#DirectoryNode"/>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#DirectoryNode [0..1]</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#DirectoryNode"/>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#DirectoryNode [0..1]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-identity">
@@ -4160,16 +4447,16 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationObject"/>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Rendition"/>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ProductVariant"/>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Rendition [0..*]</iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ProductVariant [0..*]</iirds:description>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Rendition [0..*]</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Identity"/>
         <rdfs:comment xml:lang="en">References a complex identifier.</rdfs:comment>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Component [0..*]</iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
-        <rdfs:label xml:lang="en">has complex identifier</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
+        <rdfs:label xml:lang="en">has complex identifier</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-identity-domain">
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Identity [1]</iirds:description>
@@ -4195,13 +4482,13 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#DirectoryNode"/>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#DirectoryNode"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#DirectoryNode [0..1]</iirds:description>
-        <rdfs:label xml:lang="en">has next sibling</rdfs:label>
         <rdfs:label xml:lang="de">hat als nächstes Element</rdfs:label>
+        <rdfs:label xml:lang="en">has next sibling</rdfs:label>
         <iirds:description xml:lang="en"></iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-party-role">
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Party [0..1]</iirds:description>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#PartyRole"/>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Party [0..1]</iirds:description>
         <iirds:description xml:lang="en"></iirds:description>
         <rdfs:label xml:lang="de">hat administrative Rolle</rdfs:label>
         <rdfs:label xml:lang="en">has administrative role</rdfs:label>
@@ -4247,8 +4534,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en">A range selector must reference one start and one end selector.</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-subject">
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationSubject"/>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:comment xml:lang="en">References the subject of an information unit.</rdfs:comment>
         <rdfs:comment xml:lang="de">Verweist auf das Thema einer Informationseinheit.</rdfs:comment>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
@@ -4257,8 +4544,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <rdfs:label xml:lang="de">hat Thema</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#has-topic-type">
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#TopicType"/>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <rdfs:label xml:lang="en">has topic type</rdfs:label>
         <rdfs:comment xml:lang="en">The nature of an information unit.</rdfs:comment>
         <rdfs:label xml:lang="de">hat Topictyp</rdfs:label>
@@ -4272,8 +4559,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <rdfs:comment xml:lang="en">An unambiguous reference to the resource within a given context.</rdfs:comment>
         <rdfs:label xml:lang="de">Bezeichner</rdfs:label>
-        <rdfs:comment xml:lang="de">Eine eindeutige Referenz auf die Resource in einem gegebenen Kontext.</rdfs:comment>
         <rdfs:label xml:lang="en">Identifier</rdfs:label>
+        <rdfs:comment xml:lang="de">Eine eindeutige Referenz auf die Resource in einem gegebenen Kontext.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#iiRDSVersion">
         <rdfs:label xml:lang="de">iiRDS Version</rdfs:label>
@@ -4281,8 +4568,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Package [1]</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Package"/>
         <rdfs:comment xml:lang="de">iiRDS-Version, die das iiRDS-Paket erfüllt.</rdfs:comment>
-        <rdfs:label xml:lang="en">iiRDS version</rdfs:label>
         <rdfs:comment xml:lang="en">iiRDS version to which the iiRDS package complies.</rdfs:comment>
+        <rdfs:label xml:lang="en">iiRDS version</rdfs:label>
         <iirds:description xml:lang="en">Current version is 1.0.</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#iirdsAttribute">
@@ -4311,8 +4598,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#is-applicable-for-document-type">
         <iirds:description xml:lang="en">Example: topics that are suitable for the installation instructions.</iirds:description>
-        <rdfs:label xml:lang="de">geeignet für Dokumentart</rdfs:label>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#DocumentType"/>
+        <rdfs:label xml:lang="de">geeignet für Dokumentart</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <rdfs:comment xml:lang="en">Specifies that the information unit is suitable and can be used for specific types of documents.</rdfs:comment>
@@ -4321,8 +4608,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#is-part-of-package">
         <rdfs:label xml:lang="de">ist Teil von Paket</rdfs:label>
         <iirds:description xml:lang="en"></iirds:description>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <rdfs:comment xml:lang="en">References the package in which the information unit was delivered.</rdfs:comment>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Package"/>
         <rdfs:label xml:lang="en">is part of package</rdfs:label>
@@ -4332,8 +4619,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <rdfs:label xml:lang="de">ersetzt</rdfs:label>
         <rdfs:comment xml:lang="en">References the information unit that is replaced by this information unit.</rdfs:comment>
         <rdfs:label xml:lang="en">replaces</rdfs:label>
-        <iirds:description xml:lang="en"></iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
+        <iirds:description xml:lang="en"></iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#is-version-of">
@@ -4356,18 +4643,18 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#nil">
         <rdfs:label xml:lang="en">End of Directory node</rdfs:label>
-        <rdfs:comment xml:lang="de">Das Ende in einer verketteten Liste von Verzeichnisknoten </rdfs:comment>
         <iirds:description xml:lang="en"></iirds:description>
+        <rdfs:comment xml:lang="de">Das Ende in einer verketteten Liste von Verzeichnisknoten </rdfs:comment>
         <rdfs:label xml:lang="de">Ende einer Verzeichnisstruktur</rdfs:label>
         <rdfs:comment xml:lang="en">The end in a chain of directory nodes</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#purpose">
-        <iirds:description xml:lang="en"></iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
+        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:comment xml:lang="en">Specifies the reason for changing the content lifecycle status.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..1]</iirds:description>
         <rdfs:comment xml:lang="de">Begründung zum Ausüben der Statusänderung.</rdfs:comment>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..1]</iirds:description>
         <rdfs:label xml:lang="en">Purpose</rdfs:label>
         <rdfs:label xml:lang="de">Zweck</rdfs:label>
     </rdf:Description>
@@ -4388,8 +4675,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
         <iirds:description xml:lang="en">That means that the content of the information unit relates to a specific component of the documented product or component.</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
-        <rdfs:comment xml:lang="en">Relates to a component.</rdfs:comment>
         <rdfs:label xml:lang="en">relates to component</rdfs:label>
+        <rdfs:comment xml:lang="en">Relates to a component.</rdfs:comment>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-event">
         <rdfs:label xml:lang="de">bezieht sich auf Ereignis</rdfs:label>
@@ -4402,44 +4689,44 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-functional-metadata">
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#FunctionalMetadata"/>
-        <rdfs:comment xml:lang="en">Relates an iiRDS entity to functional metadata.</rdfs:comment>
         <rdfs:label xml:lang="en">relates to functional metadata</rdfs:label>
+        <rdfs:comment xml:lang="en">Relates an iiRDS entity to functional metadata.</rdfs:comment>
         <rdfs:comment xml:lang="de">Erzeugt Beziehung von einer iiRDS-Entität zu funktionalen Metadaten.</rdfs:comment>
         <rdfs:label xml:lang="de">bezieht sich auf funktionale Metadaten</rdfs:label>
-        <iirds:description xml:lang="en">No intended to be used directly. Use the subclasses instead.</iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
+        <iirds:description xml:lang="en">No intended to be used directly. Use the subclasses instead.</iirds:description>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-information-unit">
         <rdfs:comment xml:lang="en">References an information unit from a directory node.</rdfs:comment>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#DirectoryNode"/>
         <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <rdfs:label xml:lang="de">referenziert Informationseinheit</rdfs:label>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <rdfs:label xml:lang="en">references information unit</rdfs:label>
         <iirds:description xml:lang="en">The referenced information unit is part of the directory.</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-party">
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:label xml:lang="en">relates to party</rdfs:label>
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Component [0..1]</iirds:description>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
         <iirds:description xml:lang="en"></iirds:description>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
         <rdfs:comment xml:lang="en">Relates to a party, e.g. a company or an organization.</rdfs:comment>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Component"/>
-        <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Party"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..1]</iirds:description>
+        <schema:rangeIncludes rdf:resource="http://iirds.tekom.de/iirds#Party"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ProductVariant [0..1]</iirds:description>
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#IdentityDomain"/>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ProductVariant"/>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#IdentityDomain"/>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#IdentityDomain [0..1]</iirds:description>
         <rdfs:label xml:lang="de">hat Beziehung zu Akteur</rdfs:label>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-product-feature">
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
-        <rdfs:label xml:lang="de">bezieht sich auf Produkteigenschaft</rdfs:label>
         <rdfs:label xml:lang="en">relates to product feature</rdfs:label>
+        <rdfs:label xml:lang="de">bezieht sich auf Produkteigenschaft</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <iirds:description xml:lang="en">That means that the content of the information unit refers to or describes a specific product feature.</iirds:description>
         <rdfs:comment xml:lang="en">Relates to a product feature.</rdfs:comment>
@@ -4487,8 +4774,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en"></iirds:description>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:label xml:lang="de">bezieht sich auf Hilfsmittel</rdfs:label>
-        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
         <rdfs:label xml:lang="en">relates to supply</rdfs:label>
+        <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..*]</iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#relates-to-vcard">
         <rdfs:label xml:lang="en">relates to vCard</rdfs:label>
@@ -4500,8 +4787,8 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en"></iirds:description>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#revision">
-        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#InformationUnit"/>
         <rdfs:label xml:lang="de">Revision</rdfs:label>
         <rdfs:comment xml:lang="en">Version of the information unit.</rdfs:comment>
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#InformationUnit [0..1]</iirds:description>
@@ -4521,18 +4808,18 @@ a description of the potential hazard, and hints how to avoid the hazard.</iirds
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#Rendition [1]</iirds:description>
         <iirds:description xml:lang="de">The path is relative to the root directory of the package, e.g., &quot;content/overview.html&quot;.</iirds:description>
         <rdfs:label xml:lang="de">Quelle</rdfs:label>
-        <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <rdfs:comment xml:lang="en">Relative path to the file containing the content of a rendition.</rdfs:comment>
+        <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <rdfs:label xml:lang="en">Source</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#Rendition"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://iirds.tekom.de/iirds#statusComment">
         <iirds:description xml:lang="en">Cardinality: http://iirds.tekom.de/iirds#ContentLifeCycleStatus [0..*]</iirds:description>
-        <iirds:description xml:lang="en"></iirds:description>
-        <rdfs:label xml:lang="de">Kommentar zum Status</rdfs:label>
         <schema:domainIncludes rdf:resource="http://iirds.tekom.de/iirds#ContentLifeCycleStatus"/>
-        <rdfs:comment xml:lang="en">Comment describing the status change.</rdfs:comment>
+        <rdfs:label xml:lang="de">Kommentar zum Status</rdfs:label>
+        <iirds:description xml:lang="en"></iirds:description>
         <rdfs:comment xml:lang="de">Anmerkungen im Zusammenhang mit der Vergabe des Status</rdfs:comment>
+        <rdfs:comment xml:lang="en">Comment describing the status change.</rdfs:comment>
         <schema:rangeIncludes rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
         <rdfs:label xml:lang="en">Status comment</rdfs:label>
     </rdf:Description>
